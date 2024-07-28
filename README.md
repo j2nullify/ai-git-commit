@@ -38,3 +38,6 @@ with backticks.
 
 Why not use online LLMs?
 - There are alternative solutions that do this already.
+
+Why not use LiteLLM?
+- I liked the project but unfortunately it seemed a bit too unstable for this.

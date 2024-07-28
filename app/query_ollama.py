@@ -1,9 +1,11 @@
 """Query Ollama model
 """
 
+import os
 import requests
 import json
 import subprocess
+from app.config import DEFAULT_MODEL, DEFAULT_URL
 
 
 def init_ollama():
@@ -16,10 +18,19 @@ def init_ollama():
 
 
 def query_ollama(prompt, stream: bool = True):
-    url = "http://localhost:11434/api/generate"
+    init_ollama()
+    url = os.getenv("HOW_DEFAULT_URL", DEFAULT_URL)
+    model = os.getenv("HOW_DEFAULT_MODEL", DEFAULT_MODEL)
+    history = subprocess.getoutput("history")
+
     data = {
-        "model": "llama3.1",
-        "prompt": f"Convert the following natural language command to a bash command: {prompt}",
+        "model": model,
+        "prompt": f"""Convert the following natural language command to a bash command: {prompt}
+History of CLI commands if it helps:
+<history>
+{history}
+</history>
+""",
         "stream": stream,
     }
 

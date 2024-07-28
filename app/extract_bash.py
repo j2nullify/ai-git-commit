@@ -20,7 +20,10 @@ def extract_bash_commands(llm_response: str) -> list:
     pattern = re.compile(r"```(?:bash)?(.*?)```", re.DOTALL)
     matches = pattern.findall(llm_response)
     for match in matches:
-        commands.extend(match.strip().split("\n"))
+        com = match.strip().split("\n")
+        if com == "":
+            continue
+        commands.extend(com)
 
     return commands
 

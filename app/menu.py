@@ -2,11 +2,14 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
 from rich.text import Text
+from app.config import EXIT_COMMAND
 
 console = Console()
 
 
 def row_based_rich_menu(options: list) -> str:
+
+    options.append(EXIT_COMMAND)
 
     menu_items = []
     for i, option in enumerate(options, 1):

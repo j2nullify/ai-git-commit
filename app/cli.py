@@ -3,6 +3,7 @@ import sys
 from app.query_ollama import query_ollama
 from app.extract_bash import extract_bash_commands
 from app.menu import row_based_rich_menu
+from app.config import EXIT_COMMAND
 
 
 def process_query(query: str):
@@ -12,7 +13,8 @@ def process_query(query: str):
         print("No command could be produced")
         return 0
     selected_bash_command = row_based_rich_menu(bash_commands)
-    print(f"Received: {query}")
+    if selected_bash_command == EXIT_COMMAND:
+        return 0
     try:
         result = subprocess.run(selected_bash_command, check=True, shell=True)
         return result
