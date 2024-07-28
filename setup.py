@@ -32,6 +32,7 @@ setup(
     entry_points={
         "console_scripts": [
             "how=app.cli:main",
+            "how-commit=app.commit:main",
         ],
     },
 )

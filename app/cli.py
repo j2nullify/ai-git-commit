@@ -7,7 +7,18 @@ from app.config import EXIT_COMMAND
 
 
 def process_query(query: str):
-    response = query_ollama(query)
+
+    history = subprocess.getoutput("history")
+    prompt = (
+        f"""Convert the following natural language command to a bash command: {query}
+History of CLI commands if it helps:
+<history>
+{history}
+</history>
+""",
+    )
+
+    response = query_ollama(prompt)
     bash_commands = extract_bash_commands(response)
     if len(bash_commands) == 0:
         print("No command could be produced")
