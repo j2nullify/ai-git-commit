@@ -17,7 +17,7 @@ pip install .
 
 ## Using Ask AI CLI
 
-To use the AI CLI, simply put a "#" in front of the natural language query.
+To use the AI CLI, ask "how" in front of the natural language query inside quotations.
 
 ```bash
 how "List all files"
