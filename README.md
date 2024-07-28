@@ -23,6 +23,11 @@ To use the AI CLI, ask "how" in front of the natural language query inside quota
 how "List all files"
 ```
 
+To generate automated commit messages: 
+```
+how-commit
+```
+
 ### Design Considerations
 
 Why not a "# List all files"? 
