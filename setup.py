@@ -9,7 +9,7 @@ with open("requirements.txt", "r") as req_file:
 
 setup(
     name="how",
-    version="0.0.1",
+    version="0.0.2",
     author="Jacky W",
     author_email="jacky2wong@gmail.com",
     description="A CLI tool that uses Ollama to convert natural language to CLI commands.",

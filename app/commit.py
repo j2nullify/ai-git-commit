@@ -4,6 +4,7 @@
 import subprocess
 from app.query_ollama import query_ollama
 from textwrap import dedent
+from rich.prompt import Prompt
 
 
 def generate_commit_message():
@@ -23,7 +24,10 @@ def generate_commit_message():
         Git diff:
         {git_diff_output}
 
-        Example commit message: ``feat(app/cli.py, query_ollama.py): enhance CLI experience with history and bash command conversion`
+        Example commit message: 
+```
+feat(app/cli.py, query_ollama.py): enhance CLI experience with history and bash command conversion
+```
 
         Commit message:
         """
@@ -44,7 +48,8 @@ def main():
         print(commit_message)
         # Here you could add code to automatically commit using this message
         # For example:
-        # subprocess.run(["git", "commit", "-am", commit_message])
+        value = Prompt.ask("Commit message", default=commit_message)
+        return subprocess.run(["git", "commit", "-m", value])
 
 
 if __name__ == "__main__":
