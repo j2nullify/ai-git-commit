@@ -1,0 +1,21 @@
+Script started on Sun Jul 28 22:31:45 2024
+[1m[7m%[27m[1m[0m                                                                                                            [0m[27m[24m[Jjackywong@Jackys-MBP-2 ask-ai-cli % [K[?2004hhhistory [?2004l
+ 1178  ls
+ 1179  rm -rf temp
+ 1180  mkdir temp 
+ 1181  cd temp
+ 1182  ls
+ 1183  reflex init --template chat
+ 1184  ls
+ 1185  reflex run 
+ 1186  ls
+ 1187  ls
+ 1188  ls
+ 1189  ls
+ 1190  ls 
+ 1191  sudo sl
+ 1192  sudo ls 
+ 1193  ls
+[1m[7m%[27m[1m[0m                                                                                                            [0m[27m[24m[Jjackywong@Jackys-MBP-2 ask-ai-cli % [K[?2004heexit[?2004l
+
+Script done on Sun Jul 28 22:32:05 2024
