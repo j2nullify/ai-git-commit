@@ -6,7 +6,7 @@ from app.query_ollama import query_ollama
 from app.query_bedrock import query_bedrock
 from textwrap import dedent
 from rich.prompt import Prompt
-from extract_bash import extract_bash_commands
+from app.extract_bash import extract_bash_commands
 
 
 def generate_commit_message():
