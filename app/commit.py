@@ -3,13 +3,15 @@
 
 import subprocess
 from app.query_ollama import query_ollama
+from app.query_bedrock import query_bedrock
 from textwrap import dedent
 from rich.prompt import Prompt
+from extract_bash import extract_bash_commands
 
 
 def generate_commit_message():
     # Get the git diff output
-    git_diff_output = subprocess.getoutput("git diff")
+    git_diff_output = subprocess.getoutput("git diff --cached")
 
     if not git_diff_output:
         print("No changes to commit.")
@@ -17,7 +19,7 @@ def generate_commit_message():
 
     print(git_diff_output)
     # Generate a commit message using the Ollama model
-    commit_message = query_ollama(
+    commit_message = query_bedrock(
         dedent(
             f"""
         Please generate a git commit message off this. Be concise but cover all files and changes.
@@ -48,7 +50,8 @@ def main():
         print(commit_message)
         # Here you could add code to automatically commit using this message
         # For example:
-        value = Prompt.ask("Commit message", default=commit_message)
+        bash_commands = extract_bash_commands(commit_message)
+        value = Prompt.ask("Commit message", default=bash_commands[0])
         return subprocess.run(["git", "commit", "-m", value])
 
 
