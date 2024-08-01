@@ -1,6 +1,6 @@
 # Ask How CLI
 
-A CLI that converts natural language to shell commands using Ollama.
+A CLI that converts natural language to shell commands using AWS BedRock.
 
 
 ## Installation 
@@ -9,19 +9,14 @@ Requires:
 - Python3.4+
 - Ollama
 
+Step 1 - clone this repo
 ```bash
-git clone https://github.com/ColabDog/how-ai-cli.git
-cd how-ai-cli
+git clone https://github.com/j2nullify/ai-git-commit.git
+cd ai-git-commit
 pip install .
 ```
 
 ## Using Ask AI CLI
-
-To use the AI CLI, ask "how" in front of the natural language query inside quotations.
-
-```bash
-how "List all files"
-```
 
 To generate automated commit messages: 
 ```

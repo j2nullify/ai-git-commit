@@ -27,9 +27,10 @@ def generate_commit_message():
         {git_diff_output}
 
         Example commit message: 
-```
-feat(app/cli.py, query_ollama.py): enhance CLI experience with history and bash command conversion
-```
+
+        ```bash
+        feat(app/cli.py, query_ollama.py): enhance CLI experience with history and bash command conversion
+        ```
 
         Commit message:
         """
@@ -51,6 +52,8 @@ def main():
         # Here you could add code to automatically commit using this message
         # For example:
         bash_commands = extract_bash_commands(commit_message)
+        if len(bash_commands) == 0:
+            bash_commands = [commit_message]
         value = Prompt.ask("Commit message", default=bash_commands[0])
         return subprocess.run(["git", "commit", "-m", value])
 
