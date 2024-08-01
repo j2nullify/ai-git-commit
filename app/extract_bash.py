@@ -27,6 +27,21 @@ def extract_bash_commands(llm_response: str) -> list:
 
     return commands
 
+def extract_bash_commands_no_line_split(llm_response: str) -> list:
+    """
+    Extracts a list of bash commands from a given LLM response.
+
+    Args:
+    llm_response (str): The response from the LLM containing the bash commands.
+
+    Returns:
+    list: A list of the extracted bash commands.
+    """
+    # Start of the bash script in the response
+
+    pattern = re.compile(r"```(?:bash)?(.*?)```", re.DOTALL)
+    matches = pattern.findall(llm_response)
+    return [matches[0].strip()]
 
 if __name__ == "__main__":
     from query_ollama import query_ollama

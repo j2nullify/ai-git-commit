@@ -2,11 +2,10 @@
 """
 
 import subprocess
-from app.query_ollama import query_ollama
 from app.query_bedrock import query_bedrock
 from textwrap import dedent
 from rich.prompt import Prompt
-from app.extract_bash import extract_bash_commands
+from app.extract_bash import extract_bash_commands_no_line_split
 
 
 def generate_commit_message():
@@ -51,7 +50,7 @@ def main():
         print(commit_message)
         # Here you could add code to automatically commit using this message
         # For example:
-        bash_commands = extract_bash_commands(commit_message)
+        bash_commands = extract_bash_commands_no_line_split(commit_message)
         if len(bash_commands) == 0:
             bash_commands = [commit_message]
         value = Prompt.ask("Commit message", default=bash_commands[0])
