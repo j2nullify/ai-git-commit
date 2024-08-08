@@ -1,19 +1,42 @@
 import subprocess
-from query_ollama import query_ollama
-from extract_bash import extract_bash_commands_no_line_split
+from app.query_bedrock import query_bedrock
+from app.extract_bash import extract_bash_commands_no_line_split
 
-def make_pull_request():
+def get_pr_diff():
+    try:
+        diff = subprocess.check_output(["git", "diff", "origin/main...HEAD"]).decode()
+        return diff
+    except subprocess.CalledProcessError:
+        print("Error: Unable to get the diff. Make sure you're in a git repository.")
+        return None
+
+def main():
     # Push the branch to remote
-    subprocess.run(["git", "push"])
+    # Get the current branch name
+    current_branch = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).decode().strip()
+    
+    # Set the upstream to origin and push the current branch
+    subprocess.run(["git", "push", "--set-upstream", "origin", current_branch])
 
-    # Generate PR description using Ollama
-    # Generate PR title and description using Ollama
-    prompt_title = "Generate a concise and informative pull request title for a feature branch."
-    pr_title = query_ollama(prompt_title)
+    pr_diff = get_pr_diff()
+    if not pr_diff:
+        return    
+
+    # Generate PR title and description using Bedrock
+    prompt_title = f"""Generate a concise and informative pull request title based on the following diff:
+
+{pr_diff}
+
+Respond with only the title, enclosed in triple backticks (```). For example:
+```
+feat(user-auth): Implement JWT-based authentication
+```
+"""
+    pr_title = query_bedrock(prompt_title)
     pr_title = extract_bash_commands_no_line_split(pr_title)[0]
 
-    prompt_body = "Generate a concise and informative pull request description for a feature branch. Include key changes and their impact."
-    pr_description = query_ollama(prompt_body)
+    prompt_body = f"Generate a concise and informative pull request description based on the following diff. Include key changes and their impact:\n\n{pr_diff}"
+    pr_description = query_bedrock(prompt_body)
     pr_description = extract_bash_commands_no_line_split(pr_description)[0]
 
     # Create pull request using GitHub CLI
@@ -30,7 +53,15 @@ def make_pull_request():
         return
 
     # If gh is installed, proceed with creating the pull request
-    subprocess.run(["gh", "pr", "create", "--title", pr_title, "--body", pr_description])
+    
+    result = subprocess.run(["gh", "pr", "create", "--title", pr_title, "--body", pr_description])
+    if result.returncode != 0:
+        result = subprocess.run(["gh", "pr", "edit", "--title", pr_title, "--body", pr_description])
+
+    if result.returncode == 0:
+        print("✅ Pull request created successfully!")
+    else:
+        print("❌ Failed to create pull request. Please try again.")
 
 if __name__ == "__main__":
-    make_pull_request()
+    main()

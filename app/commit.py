@@ -54,11 +54,13 @@ def main():
         if len(bash_commands) == 0:
             bash_commands = [commit_message]
         value = Prompt.ask("Commit message", default=bash_commands[0])
+        if value.strip() == "":
+            value = bash_commands[0].strip()
         result = subprocess.run(["git", "commit", "-m", value])
         if result.returncode == 0:
             print("✅ Committed successfully!")
-        return result
-
+        else:
+            print("❌ Failed to commit. Please try again.")
 
 if __name__ == "__main__":
     main()
