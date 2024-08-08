@@ -45,6 +45,7 @@ def query_bedrock(prompt: str, stream: bool = True):
             if "delta" in chunk:
                 if "text" in chunk["delta"]:
                     text = chunk["delta"]["text"]
+                    print(text, end="")
                     full_response += text
         print()  # Print a newline at the end
     else:
