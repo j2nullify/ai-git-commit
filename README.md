@@ -1,7 +1,6 @@
 # Ask How CLI
 
-A CLI that converts natural language to shell commands using AWS BedRock.
-
+Update your Git workflow with AI
 
 ## Installation 
 
