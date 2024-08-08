@@ -41,7 +41,11 @@ def extract_bash_commands_no_line_split(llm_response: str) -> list:
 
     pattern = re.compile(r"```(?:bash)?(.*?)```", re.DOTALL)
     matches = pattern.findall(llm_response)
-    return [matches[0].strip()]
+    try:
+        return [matches[0].strip()]
+    except Exception as e:
+        # Then usually the whole response is the commit message
+        return [llm_response]
 
 if __name__ == "__main__":
     from query_ollama import query_ollama
