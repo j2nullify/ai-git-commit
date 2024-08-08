@@ -23,7 +23,15 @@ def main():
         return    
 
     # Generate PR title and description using Bedrock
-    prompt_title = f"Generate a concise and informative pull request title based on the following diff:\n\n{pr_diff}"
+    prompt_title = f"""Generate a concise and informative pull request title based on the following diff:
+
+{pr_diff}
+
+Respond with only the title, enclosed in triple backticks (```). For example:
+```
+feat(user-auth): Implement JWT-based authentication
+```
+"""
     pr_title = query_bedrock(prompt_title)
     pr_title = extract_bash_commands_no_line_split(pr_title)[0]
 
@@ -54,8 +62,6 @@ def main():
         print("✅ Pull request created successfully!")
     else:
         print("❌ Failed to create pull request. Please try again.")
-    return result 
-
 
 if __name__ == "__main__":
     main()
