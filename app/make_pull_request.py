@@ -48,7 +48,8 @@ def main():
     
     result = subprocess.run(["gh", "pr", "create", "--title", pr_title, "--body", pr_description])
     if result.returncode != 0:
-        result = subprocess.run(["gh", "pr", "create", "--fill", "--title", pr_title, "--body", pr_description])
+        result = subprocess.run(["gh", "pr", "edit", "--title", pr_title, "--body", pr_description])
+
     if result.returncode == 0:
         print("✅ Pull request created successfully!")
     else:
