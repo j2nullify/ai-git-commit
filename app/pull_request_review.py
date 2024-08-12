@@ -27,12 +27,28 @@ def review_pull_request(pr_number):
     if not pr_diff:
         return
     prompt = f"""Review the following pull request diff and provide a concise review comment. 
-    Include any potential issues, suggestions for improvement, and overall assessment.
-    If you have any specific code change suggestions, please include them as well.
+    Focus on detecting any potential issues, bugs, or security vulnerabilities.
+    Include suggestions for improvement, and an overall assessment of code quality and functionality.
+    If you have any specific code change suggestions to address these concerns, please include them as well.
+    
+    Additionally, highlight any unintended consequences or potential side effects that the developer may not have realized. 
+    Consider suggesting better approaches based on established frameworks or design patterns.
+    
+    Analyze the changes in the context of:
+    1. Code maintainability and readability
+    2. Performance implications
+    3. Scalability considerations
+    4. Adherence to best practices and coding standards
+    5. Potential impact on other parts of the system
+    
+    If applicable, recommend using specific libraries, tools, or frameworks that could improve the implementation.
 
     {pr_diff}
 
-    Respond with only the review comment, enclosed in triple backticks (```). For example:
+    Respond with only the review comment, enclosed in triple backticks (```).
+
+    For example:
+
     ```
     The changes look good overall. Consider adding more unit tests for the new functionality.
     
