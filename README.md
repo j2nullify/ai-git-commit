@@ -22,16 +22,20 @@ To generate automated commit messages:
 # Add your files like normal
 git add -u
 # Ai-generate commit messages
-how-commit
+ai-commit
 ```
 ![image](./images/image.png)
 
 
 Then, you can push your changes and use AI to auto-generate you a description
 
+```bash
+ai-pr
 ```
-how-pr
+
+To then review: 
+```bash
+ai-review
 ```
 
 See example PR: https://github.com/j2nullify/ai-git-commit/pull/2
-

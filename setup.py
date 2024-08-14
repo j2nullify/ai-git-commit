@@ -32,8 +32,9 @@ setup(
     entry_points={
         "console_scripts": [
             "how=app.cli:main",
-            "how-commit=app.commit:main",
-            "how-pr=app.make_pull_request:main",
+            "ai-commit=app.commit:main",
+            "ai-pr=app.make_pull_request:main",
+            "ai-review=app.pull_request_review:main",
         ],
     },
 )
