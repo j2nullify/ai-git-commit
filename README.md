@@ -1,6 +1,6 @@
-# Ask How CLI
+# AI Git
 
-Update your Git workflow with AI
+Update your Git workflow with AI.
 
 ## Installation 
 
@@ -26,13 +26,14 @@ ai-commit
 ![image](./images/image.png)
 
 
-Then, you can push your changes and use AI to auto-generate you a description
+Then, you can push your changes and use AI to auto-generate you a description and assign basic SemVer2.0 labels.
 
 ```bash
 ai-pr
 ```
 
-To then review: 
+If you want a Github comment reviewing your PR:
+
 ```bash
 ai-review
 ```
