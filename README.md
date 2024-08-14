@@ -6,7 +6,6 @@ Update your Git workflow with AI
 
 Requires:
 - Python3.4+
-- Ollama
 
 Step 1 - clone this repo
 ```bash
