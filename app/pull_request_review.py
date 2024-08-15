@@ -63,7 +63,6 @@ def review_pull_request(pr_number):
     """
 
     review_comment = query_bedrock(prompt)
-    review_comment = extract_bash_commands_no_line_split(review_comment)[0]
 
     try:
         result = subprocess.run([
